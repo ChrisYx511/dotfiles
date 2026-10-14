@@ -1,0 +1,113 @@
+alt - down: yabai -m window --focus south
+alt - up: yabai -m window --focus north
+alt - left: yabai -m window --focus west
+alt - right: yabai -m window --focus east
+alt - q: yabai -m display --focus west
+alt - e: yabai -m display --focus east
+
+shift + alt - f: yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+# move window to space #
+ctrl + alt - 1: yabai -m window --space 1;
+ctrl + alt - 2: yabai -m window --space 2;
+ctrl + alt - 3: yabai -m window --space 3;
+ctrl + alt - 4: yabai -m window --space 4;
+ctrl + alt - 5: yabai -m window --space 5;
+ctrl + alt - 6: yabai -m window --space 6;
+ctrl + alt - 7: yabai -m window --space 7;
+ctrl + alt - 8: yabai -m window --space 8;
+ctrl + alt - 9: yabai -m window --space 9;
+ctrl + alt - 0: yabai -m window --space 10;
+# move window with desktop change #
+shift + alt - 1: yabai -m window --space 1 --focus;
+shift + alt - 2: yabai -m window --space 2 --focus;
+shift + alt - 3: yabai -m window --space 3 --focus;
+shift + alt - 4: yabai -m window --space 4 --focus;
+shift + alt - 5: yabai -m window --space 5 --focus;
+shift + alt - 6: yabai -m window --space 6 --focus;
+shift + alt - 7: yabai -m window --space 7 --focus;
+shift + alt - 8: yabai -m window --space 8 --focus;
+shift + alt - 9: yabai -m window --space 9 --focus;
+shift + alt - 0: yabai -m window --space 10 --focus;
+
+# focus space #
+ctrl - 1: index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[0].index') && yabai -m space --focus "${index}"
+ctrl - 2: index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[1].index') && yabai -m space --focus "${index}"
+ctrl - 3: index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[2].index') && yabai -m space --focus "${index}"
+ctrl - 4: index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[3].index') && yabai -m space --focus "${index}"
+ctrl - 5: index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[4].index') && yabai -m space --focus "${index}"
+ctrl - 6: index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[5].index') && yabai -m space --focus "${index}"
+ctrl - 7: index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[6].index') && yabai -m space --focus "${index}"
+ctrl - 8: index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[7].index') && yabai -m space --focus "${index}"
+ctrl - 9: index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[8].index') && yabai -m space --focus "${index}"
+ctrl - 0: index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[9].index') && yabai -m space --focus "${index}"
+
+
+ctrl - 0x1B: index=$(yabai -m query --spaces --display | jq ".[0]" | jq .index); eval "$(yabai -m query --spaces | jq --argjson index "${index}" -r '(.[] | select(.index == $index).windows[0]) as $wid | if $wid then "yabai -m window --focus \"" + ($wid | tostring) + "\"" else "skhd --key \"ctrl - " + (map(select(."is-native-fullscreen" == false)) | index(map(select(.index == $index))) + 1 % 10 | tostring) + "\"" end')"
+
+shift + alt - 0x2F: yabai -m window --space next --focus
+shift + alt - 0x2B: yabai -m window --space prev --focus
+
+ctrl + alt - 0x2F: yabai -m window --space next
+ctrl + alt - 0x2B: yabai -m window --space prev
+
+shift + alt - 0x18: yabai -m window --display recent; yabai -m display --focus recent
+ctrl + alt - 0x18: yabai -m window --display recent;
+
+shift + alt - down: yabai -m window --swap south
+shift + alt - up: yabai -m window --swap north
+shift + alt - left: yabai -m window --swap west
+shift + alt - right: yabai -m window --swap east
+
+ctrl + alt - down: yabai -m window --warp south
+ctrl + alt - up: yabai -m window --warp north
+ctrl + alt - left: yabai -m window --warp west
+ctrl + alt - right: yabai -m window --warp east
+
+shift + alt - m: yabai -m window --toggle zoom-fullscreen
+
+# focus recent space & recent display #
+shift + alt - tab: yabai -m display --focus recent
+alt - tab: /Users/chrisyx511/.config/skhd/moveToLastUsed.sh
+
+# stop/start/restart yabai
+ctrl + alt - q: yabai --stop-service
+ctrl + alt - s: yabai --start-service
+ctrl + alt - r: yabai --restart-service
+
+alt - space: yabai -m window --toggle split
+
+cmd + alt - w: osascript -e 'tell application "System Events" to perform action "AXPress" of (first button whose subrole is "AXCloseButton") of (first window whose subrole is "AXStandardWindow") of (first process whose frontmost is true)'
+
+alt - s: yabai -m window --focus south
+alt - w: yabai -m window --focus north
+alt - a: yabai -m window --focus west
+alt - d: yabai -m window --focus east
+
+shift + alt - s: yabai -m window --swap south
+shift + alt - w: yabai -m window --swap north
+shift + alt - a: yabai -m window --swap west
+shift + alt - d: yabai -m window --swap east
+
+ctrl - return: yabai -m window --focus mouse
+
+shift + alt - q: osascript -e 'tell application "Finder" to make new Finder window' && osascript -e "tell application \"Finder\" to activate"
+shift + alt - t: osascript /Users/chrisyang/AppleScripts/OpeniTerm.scpt
+shift + alt - space: yabai -m space --balance
+
+ctrl + shift - n: yabai -m space --create && \
+                index="$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && \
+                yabai -m space --focus "${index}"
+
+ctrl + shift - d: index=$(yabai -m query --spaces --space | jq '.index') && yabai -m space --focus prev && yabai -m space --destroy "${index}"
+
+ctrl - right: yabai -m space --focus next
+ctrl - left: yabai -m space --focus prev
+
+# change master width
+lalt + shift - h : ~/.config/skhd/resizeWindow.sh -h
+lalt + shift - l : ~/.config/skhd/resizeWindow.sh -l
+
+# change split height
+lalt + shift - u : ~/.config/skhd/resizeWindow.sh -u
+lalt + shift - n : ~/.config/skhd/resizeWindow.sh -d

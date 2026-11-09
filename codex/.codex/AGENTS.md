@@ -1,3 +1,7 @@
+# Explanations and response style
+
+Use the [explain skill](skills/explain/SKILL.md) for all user-facing prose, including answers, progress updates, reviews, and written deliverables. Follow the spirit of ASD-STE100 **about 80% of the way**. Keep sentences short and direct. Explain the relevant behavior, reasons, and consequences without losing technical accuracy or necessary detail. Treat 80% as a practical style target, not strict compliance. Preserve exact code, quotations, and required output formats. Honor a specific user request for a different style.
+
 # Git and PR workflow
 
 - Use the git-spice CLI for branch navigation and PR-stack management whenever working in a git-spice-managed repository. Inspect the current branch and stack with `git-spice log long` (or `--json`) before making branch or PR changes.
